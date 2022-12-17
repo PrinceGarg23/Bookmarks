@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/app_background"
+    tools:context=".activities.DashActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <TextView
+            android:id="@+id/headTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:text="Your Bookmarks"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/headTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="10dp"
+            >
+        <TextView
+            android:id="@+id/listTextView"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:background="@drawable/switchcolor"
+            android:padding="5dp"
+            android:layout_margin="10dp"
+            android:text="List View"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:clickable="true"
+            app:layout_constraintTop_toBottomOf="@id/headTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/gridTextView"/>
+
+        <TextView
+            android:id="@+id/gridTextView"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:text="Collections"
+            android:textSize="20dp"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            android:background="@drawable/switchcolor"
+            android:clickable="true"
+            android:textAlignment="center"
+            android:padding="5dp"
+            app:layout_constraintTop_toBottomOf="@id/headTextView"
+            app:layout_constraintStart_toEndOf="@id/listTextView"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        </LinearLayout>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

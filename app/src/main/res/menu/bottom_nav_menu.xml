@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bookmarks"
+        android:title="Bookmarks"
+        android:icon="@drawable/bookselector"/>
+    <item
+        android:id="@+id/add"
+        android:title="Add new"
+        android:icon="@drawable/addselector"/>
+    <item
+        android:id="@+id/explore"
+        android:title="Explore"
+        android:icon="@drawable/exploreselector"/>
+    <item
+        android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/profileselector"/>
+</menu>
