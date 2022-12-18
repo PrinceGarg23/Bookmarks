@@ -1,9 +1,5 @@
 package com.example.bookmarks.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,8 +8,13 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.bookmarks.R;
 import com.example.bookmarks.ReadWriteUserDetails;
+import com.example.bookmarks.Saves;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,9 +23,10 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -95,12 +97,11 @@ public class RegisterActivity extends AppCompatActivity {
                             //Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
                             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
-                            UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(name)
-                                    .build();
-                            firebaseUser.updateProfile(profileChangeRequest);
 
-                            ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(name,email);
+                            ArrayList<Saves> bookmarks = new ArrayList<>();
+                            bookmarks.add(new Saves("a","a","a","a"));
+
+                            ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(name,email,bookmarks);
 
                             DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered User");
                             referenceProfile.child(firebaseUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {

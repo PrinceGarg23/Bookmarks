@@ -6,9 +6,10 @@ public class ReadWriteUserDetails {
     public String name, email;
     public ArrayList<Saves> bookmarks;
 
-    public ReadWriteUserDetails(String name, String email) {
+    public ReadWriteUserDetails(String name, String email, ArrayList<Saves> bookmarks) {
         this.name = name;
         this.email = email;
+        this.bookmarks = bookmarks;
     }
 
 
@@ -20,7 +21,7 @@ public class ReadWriteUserDetails {
         return email;
     }
 
-    public ArrayList<Saves> getBookmarks() {
+    public ArrayList<Saves> getBookmark() {
         return bookmarks;
     }
 

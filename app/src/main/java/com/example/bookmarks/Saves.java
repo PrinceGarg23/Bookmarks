@@ -10,6 +10,9 @@ public class Saves {
         this.image = image;
     }
 
+    public Saves() {
+    }
+
     public String getHeading() {
         return heading;
     }
