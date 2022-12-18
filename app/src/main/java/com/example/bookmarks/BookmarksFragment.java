@@ -61,7 +61,7 @@ public class BookmarksFragment extends Fragment {
         if (networkInfo != null && networkInfo.isConnected()) {
             bookmarks = new ArrayList<>();
             recyclerView = rootView.findViewById(R.id.bookmarksRecyclerView);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, true));
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
             adapter = new listAdapter(bookmarks, getContext());

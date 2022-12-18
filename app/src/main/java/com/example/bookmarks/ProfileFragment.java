@@ -1,10 +1,12 @@
 package com.example.bookmarks;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,7 +26,7 @@ public class ProfileFragment extends Fragment {
 
     TextView nameView, emailView;
     ImageView imageView;
-
+    Button logoutButton,editButton;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -40,6 +42,18 @@ public class ProfileFragment extends Fragment {
         nameView = rootView.findViewById(R.id.profileName);
         emailView = rootView.findViewById(R.id.profileEmail);
         imageView = rootView.findViewById(R.id.profileImage);
+        logoutButton = rootView.findViewById(R.id.signOut);
+        editButton = rootView.findViewById(R.id.editProfile);
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                getActivity().finish();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {

@@ -50,7 +50,7 @@ public class listAdapter extends RecyclerView.Adapter<listAdapter.ViewHolder> {
 
             }
         });
-        Picasso.get().load(bookmarks.get(position).getImage()).into(holder.image);
+        Picasso.get().load(bookmarks.get(position).getImage()).placeholder(R.drawable.bookmarkclay).error(R.drawable.bookmarkclay).into(holder.image);
     }
 
     @Override
