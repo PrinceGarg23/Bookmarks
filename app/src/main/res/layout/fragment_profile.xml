@@ -27,7 +27,8 @@
                 android:layout_height="100dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/profile" />
+                android:src="@drawable/profile"
+                android:background="@drawable/image"/>
 
             <TextView
                 android:id="@+id/profileName"
