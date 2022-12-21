@@ -23,10 +23,11 @@
 
             <ImageView
                 android:id="@+id/profileImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
+                android:padding="15dp"
                 android:src="@drawable/profile"
                 android:background="@drawable/image"/>
 
@@ -58,10 +59,10 @@
             <Button
                 android:id="@+id/signOut"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_below="@id/profileEmail"
+                android:layout_below="@id/progressBar"
                 android:text="Sign Out"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -75,10 +76,10 @@
             <Button
                 android:id="@+id/editProfile"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_below="@id/profileEmail"
+                android:layout_below="@id/progressBar"
                 android:text="Edit Profile"
                 android:clickable="true"
                 android:textColor="@color/white"
@@ -88,6 +89,15 @@
                 android:layout_marginRight="20dp"
                 android:layout_toLeftOf="@id/signOut"
                 android:layout_alignParentBottom="true" />
+            
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:id="@+id/progressBar"
+                android:indeterminate="true"
+                android:visibility="gone"
+                />
 
 
 

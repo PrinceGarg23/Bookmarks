@@ -10,19 +10,20 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/grad_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/editImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:layout_marginTop="20dp"
+        android:padding="15dp"
         android:src="@drawable/profile"
         android:background="@drawable/image"
         app:layout_constraintStart_toStartOf="parent"

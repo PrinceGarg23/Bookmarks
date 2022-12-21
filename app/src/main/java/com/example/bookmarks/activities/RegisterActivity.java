@@ -1,10 +1,12 @@
 package com.example.bookmarks.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -25,6 +27,8 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -33,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText etName, etEmail, etPassword;
     ProgressBar progressBar;
     Button btnRegister;
+    ImageView etImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         actionBar.hide();
 
         etName = findViewById(R.id.usernameEditText);
+        etImage = findViewById(R.id.imageView);
         etEmail = findViewById(R.id.emailEditText);
         etPassword = findViewById(R.id.passwordEditText);
         progressBar = findViewById(R.id.progressBar);
@@ -53,7 +59,8 @@ public class RegisterActivity extends AppCompatActivity {
             String name = etName.getText().toString().trim();
             String email = etEmail.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
-
+            Uri imageUri = Uri.parse("android.resource://com.example.bookmarks/"+R.drawable.profile);
+            String image = imageUri.toString();
             if (name.isEmpty()) {
                 etName.setError("Name is required");
                 etName.requestFocus();
@@ -80,13 +87,13 @@ public class RegisterActivity extends AppCompatActivity {
 
             progressBar.setVisibility(View.VISIBLE);
             btnRegister.setVisibility(View.GONE);
-            registerUser(name, email, password);
+            registerUser(name, email, password, image);
             // register the user in firebase
 
         });
     }
 
-    private void registerUser(String name, String email, String password) {
+    private void registerUser(String name, String email, String password, String image) {
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this,
@@ -97,11 +104,10 @@ public class RegisterActivity extends AppCompatActivity {
                             //Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
                             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
-
                             ArrayList<Saves> bookmarks = new ArrayList<>();
                             bookmarks.add(new Saves("a","a","a","a"));
 
-                            ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(name,email,bookmarks);
+                            ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(name,email,bookmarks,image);
 
                             DatabaseReference referenceProfile = FirebaseDatabase.getInstance().getReference("Registered User");
                             referenceProfile.child(firebaseUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -111,6 +117,12 @@ public class RegisterActivity extends AppCompatActivity {
                                         Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
                                         btnRegister.setVisibility(View.VISIBLE);
+
+                                        //push image in storage for that user
+                                        StorageReference storageReference = FirebaseStorage.getInstance().getReference("Users");
+                                        StorageReference imageReference = storageReference.child(firebaseUser.getUid()).child("profile.png");
+                                        imageReference.putFile(Uri.parse(image));
+
                                         //send verification email
                                         firebaseUser.sendEmailVerification();
                                         Toast.makeText(RegisterActivity.this, "Verification email sent", Toast.LENGTH_SHORT).show();

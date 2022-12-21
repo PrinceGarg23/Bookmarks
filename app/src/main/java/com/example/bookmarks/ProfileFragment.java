@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +29,7 @@ public class ProfileFragment extends Fragment {
     TextView nameView, emailView;
     ImageView imageView;
     Button logoutButton,editButton;
+    ProgressBar progressBar;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -44,6 +47,12 @@ public class ProfileFragment extends Fragment {
         imageView = rootView.findViewById(R.id.profileImage);
         logoutButton = rootView.findViewById(R.id.signOut);
         editButton = rootView.findViewById(R.id.editProfile);
+        ProgressBar progressBar = rootView.findViewById(R.id.progressBar);
+
+        progressBar.setVisibility(View.VISIBLE);
+        nameView.setVisibility(View.GONE);
+        emailView.setVisibility(View.GONE);
+        imageView.setVisibility(View.GONE);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +78,15 @@ public class ProfileFragment extends Fragment {
                     String email = snapshot.child("email").getValue().toString();
                     nameView.setText(name);
                     emailView.setText(email);
+
+                    String image = snapshot.child("image").getValue().toString();
+                    Glide.with(ProfileFragment.this).load(image).into(imageView);
+
+                    progressBar.setVisibility(View.GONE);
+                    nameView.setVisibility(View.VISIBLE);
+                    emailView.setVisibility(View.VISIBLE);
+                    imageView.setVisibility(View.VISIBLE);
+
                 }
 
                 @Override
